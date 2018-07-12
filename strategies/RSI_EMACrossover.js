@@ -1,6 +1,10 @@
-// Source: https://raw.githubusercontent.com/vrfurl/gekko/stable/strategies/EMACrossover.js
+// Original Source: https://raw.githubusercontent.com/vrfurl/gekko/stable/strategies/EMACrossover.js
 // Downloaded from: https://github.com/xFFFFF/Gekko-Strategies
-// helpers
+// Changed EMA's to 3 and 50 periods and Added 9 Period RSI. (TC Mabe 7/11/2018)
+// This strategy enters a trade when EMA-3 is above EMA-50 and RSI-9 is equal or above 60.
+// This strategy exits a trade when the EMA-50 is above the EMA-3 regardless of RSI values.
+// This strategy was built with 15 minutes intervals in mind.
+
 var _ = require('lodash');
 var log = require('../core/log.js');
 
