@@ -33,7 +33,7 @@ method.init = function() {
 
   this.addTalibIndicator('shortEMA', 'ema', {optInTimePeriod : this.settings.shortSize});
   this.addTalibIndicator('longEMA', 'ema', {optInTimePeriod : this.settings.longSize});
-  this.addTalibIndicator('rsi9', 'rsi', {optInTimePeriod : this.settings.rsiSize});
+  this.addTalibIndicator('rsi', 'rsi', {optInTimePeriod : this.settings.rsiPeriods});
 
   log.debug(this.name+' Strategy initialized');
 
@@ -49,7 +49,7 @@ method.update = function(candle) {
 method.log = function() {
   var shortEMA = this.talibIndicators.shortEMA;
   var longEMA = this.talibIndicators.longEMA;
-  var rsi9 = this.talibIndicators.rsi9; 
+  var rsi = this.talibIndicators.rsi; 
 
   log.debug('Required history is: '+this.requiredHistory);
 
@@ -59,21 +59,21 @@ method.log = function() {
 
   log.debug('\t', 'longEMA:', longEMA.result);
 
-  log.debug('\t', 'rsi9:', rsi9.result);
+  log.debug('\t', 'rsi:', rsi.result);
 }
 
 method.check = function(candle) {
 
   var shortResult = this.talibIndicators.shortEMA.result.outReal;
   var longResult = this.talibIndicators.longEMA.result.outReal;
-  var rsi9Result = this.talibIndicators.rsi9.result.outReal;
+  var rsiResult = this.talibIndicators.rsi.result.outReal;
   var price = candle.close;
 
   var message = '@ ' + price.toFixed(8);
 
 
   //EMA Golden Cross
-  if((shortResult - longResult) >= this.delta && rsi9Result >= 60) {
+  if((shortResult - longResult) >= this.delta && rsiResult >=  this.settings.rsiHigh) {
     log.debug('we are currently in uptrend', message);
 
     if(this.currentTrend !== 'up') {

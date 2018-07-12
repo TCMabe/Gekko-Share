@@ -14,8 +14,14 @@ shortSize = 3
 # longEMA size
 longSize = 50
 
-# rsiSize
-rsiSize = 9
+# rsiPeriods
+rsiPeriods = 9
+
+# rsiHigh
+rsiHigh = 60
+
+# rsiLow
+rsiLow = 40
 
 # Delta between the two EMAs after they cross
 delta = 0
